@@ -27,10 +27,10 @@ interface LoggerInterface extends BaseLoggerInterface
     /**
      * set log format
      * 
-     * @param string $logFormat
+     * @param \YukataRm\Logger\Enum\LogFormatEnum|string $logFormat
      * @return static
      */
-    public function setLogFormat(string $logFormat): static;
+    public function setLogFormat(LogFormatEnum|string $logFormat): static;
 
     /**
      * add log format
