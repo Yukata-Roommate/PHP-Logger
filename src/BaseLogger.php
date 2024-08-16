@@ -8,7 +8,7 @@ use YukataRm\Logger\EnvLoader;
 use YukataRm\Logger\Enum\LogLevelEnum;
 use YukataRm\Logger\Enum\LogFormatEnum;
 
-use YukataRm\File\Writer\Interface\CommonInterface;
+use YukataRm\File\Base\Interface\WriterInterface;
 use YukataRm\File\Proxy\Writer;
 
 /**
@@ -37,13 +37,6 @@ abstract class BaseLogger implements BaseLoggerInterface
     protected LogLevelEnum $logLevel;
 
     /**
-     * writer
-     *
-     * @var \YukataRm\File\Writer\Interface\CommonInterface
-     */
-    protected CommonInterface $writer;
-
-    /**
      * constructor
      *
      * @param \YukataRm\Logger\Enum\LogLevelEnum $logLevel
@@ -52,7 +45,6 @@ abstract class BaseLogger implements BaseLoggerInterface
     {
         $this->env      = new EnvLoader();
         $this->logLevel = $logLevel;
-        $this->writer   = Writer::common();
     }
 
     /**
@@ -72,20 +64,18 @@ abstract class BaseLogger implements BaseLoggerInterface
     /**
      * logging
      *
+     * @param bool $isFlush
      * @return void
      */
-    public function logging(): void
+    public function logging(bool $isFlush = true): void
     {
         $this->rotateLog();
 
         if (!$this->isLogging()) return;
 
-        $this->writer->setDirname($this->outputDirectory())
-            ->setFilename($this->fileName())
-            ->setExtension($this->fileExtension())
-            ->useFileAppend()
-            ->useLockEx()
-            ->writeAsIs($this->contents);
+        $this->loggingByWriter();
+
+        if ($isFlush) $this->flush();
     }
 
     /**
@@ -96,6 +86,33 @@ abstract class BaseLogger implements BaseLoggerInterface
     protected function isLogging(): bool
     {
         return !empty($this->contents);
+    }
+
+    /**
+     * logging by writer
+     * 
+     * @return void
+     */
+    protected function loggingByWriter(): void
+    {
+        $writer = $this->writer();
+
+        $writer->setDirname($this->outputDirectory())
+            ->setFilename($this->fileName())
+            ->setExtension($this->fileExtension())
+            ->useFileAppend()
+            ->useLockEx()
+            ->writeAsIs($this->contents);
+    }
+
+    /**
+     * get Writer instance
+     * 
+     * @return \YukataRm\File\Base\Interface\WriterInterface
+     */
+    protected function writer(): WriterInterface
+    {
+        return Writer::make();
     }
 
     /*----------------------------------------*
@@ -218,6 +235,18 @@ abstract class BaseLogger implements BaseLoggerInterface
         $content = $this->format($message, $value);
 
         return $this->addContent($content);
+    }
+
+    /**
+     * flush content
+     * 
+     * @return static
+     */
+    public function flush(): static
+    {
+        $this->contents = [];
+
+        return $this;
     }
 
     /**

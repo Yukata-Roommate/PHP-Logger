@@ -29,9 +29,10 @@ interface BaseLoggerInterface
     /**
      * logging
      *
+     * @param bool $isFlush
      * @return void
      */
-    public function logging(): void;
+    public function logging(bool $isFlush = true): void;
 
     /*----------------------------------------*
      * Log Rotation
@@ -79,6 +80,13 @@ interface BaseLoggerInterface
      * @return static
      */
     public function add(mixed $message, mixed $value = null): static;
+
+    /**
+     * flush content
+     * 
+     * @return static
+     */
+    public function flush(): static;
 
     /*----------------------------------------*
      * Directory
