@@ -95,11 +95,11 @@ abstract class BaseLogger implements BaseLoggerInterface
      */
     protected function loggingByWriter(): void
     {
+        $path = $this->outputDirectory() . DIRECTORY_SEPARATOR . $this->fileName() . "." . $this->fileExtension();
+
         $writer = $this->writer();
 
-        $writer->setDirname($this->outputDirectory())
-            ->setFilename($this->fileName())
-            ->setExtension($this->fileExtension())
+        $writer->setPath($path)
             ->useFileAppend()
             ->useLockEx()
             ->writeAsIs($this->contents);
