@@ -79,6 +79,16 @@ abstract class BaseLogger implements BaseLoggerInterface
     }
 
     /**
+     * get log file path
+     * 
+     * @return string
+     */
+    public function filePath(): string
+    {
+        return $this->outputDirectory() . DIRECTORY_SEPARATOR . $this->fileName() . "." . $this->fileExtension();
+    }
+
+    /**
      * whether logging
      *
      * @return bool
@@ -95,24 +105,7 @@ abstract class BaseLogger implements BaseLoggerInterface
      */
     protected function loggingByWriter(): void
     {
-        $path = $this->outputDirectory() . DIRECTORY_SEPARATOR . $this->fileName() . "." . $this->fileExtension();
-
-        $writer = $this->writer();
-
-        $writer->setPath($path)
-            ->useFileAppend()
-            ->useLockEx()
-            ->writeAsIs($this->contents);
-    }
-
-    /**
-     * get Writer instance
-     * 
-     * @return \YukataRm\File\Base\Interface\WriterInterface
-     */
-    protected function writer(): WriterInterface
-    {
-        return Writer::make();
+        Writer::write($this->filePath(), $this->contents, true, true);
     }
 
     /*----------------------------------------*

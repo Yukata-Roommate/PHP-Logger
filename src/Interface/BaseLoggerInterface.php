@@ -34,6 +34,13 @@ interface BaseLoggerInterface
      */
     public function logging(bool $isFlush = true): void;
 
+    /**
+     * get log file path
+     * 
+     * @return string
+     */
+    public function filePath(): string;
+
     /*----------------------------------------*
      * Log Rotation
      *----------------------------------------*/
