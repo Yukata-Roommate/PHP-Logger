@@ -147,7 +147,7 @@ abstract class BaseLogger implements BaseLoggerInterface
      */
     public function fileMode(): int
     {
-        return isset($this->fileMode) ? $this->fileMode : 0666;
+        return isset($this->fileMode) ? $this->fileMode : $this->envFileMode();
     }
 
     /**
@@ -170,7 +170,7 @@ abstract class BaseLogger implements BaseLoggerInterface
      */
     public function fileOwner(): string|null
     {
-        return isset($this->fileOwner) ? $this->fileOwner : null;
+        return isset($this->fileOwner) ? $this->fileOwner : $this->envFileOwner();
     }
 
     /**
@@ -193,7 +193,7 @@ abstract class BaseLogger implements BaseLoggerInterface
      */
     public function fileGroup(): string|null
     {
-        return isset($this->fileGroup) ? $this->fileGroup : null;
+        return isset($this->fileGroup) ? $this->fileGroup : $this->envFileGroup();
     }
 
     /**
@@ -870,6 +870,36 @@ abstract class BaseLogger implements BaseLoggerInterface
     protected function envFileExtension(): string
     {
         return $this->env->fileExtension;
+    }
+
+    /**
+     * get env file mode
+     * 
+     * @return int
+     */
+    protected function envFileMode(): int
+    {
+        return $this->env->fileMode;
+    }
+
+    /**
+     * get env file owner
+     * 
+     * @return string|null
+     */
+    protected function envFileOwner(): string|null
+    {
+        return $this->env->fileOwner;
+    }
+
+    /**
+     * get env file group
+     * 
+     * @return string|null
+     */
+    protected function envFileGroup(): string|null
+    {
+        return $this->env->fileGroup;
     }
 
     /**

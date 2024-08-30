@@ -194,6 +194,67 @@ class EnvLoader extends BaseEnvLoader
     const FILE_EXTENSION_KEY = self::KEY_PREFIX . "FILE_EXTENSION";
 
     /*----------------------------------------*
+     * File Mode
+     *----------------------------------------*/
+
+    /**
+     * file mode
+     * 
+     * @var int
+     */
+    public int $fileMode;
+
+    /**
+     * file mode default value
+     * 
+     * @var int
+     */
+    const FILE_MODE = 0666;
+
+    /**
+     * file mode key name
+     * 
+     * @var string
+     */
+    const FILE_MODE_KEY = self::KEY_PREFIX . "FILE_MODE";
+
+    /*----------------------------------------*
+     * File Owner
+     *----------------------------------------*/
+
+    /**
+     * file owner
+     * 
+     * @var string|null
+     */
+    public string|null $fileOwner;
+
+    /**
+     * file mode key name
+     * 
+     * @var string
+     */
+    const FILE_OWNER_KEY = self::KEY_PREFIX . "FILE_OWNER";
+
+    /*----------------------------------------*
+     * File Group
+     *----------------------------------------*/
+
+    /**
+     * file group
+     * 
+     * @var string|null
+     */
+    public string|null $fileGroup;
+
+    /**
+     * file group key name
+     * 
+     * @var string
+     */
+    const FILE_GROUP_KEY = self::KEY_PREFIX . "FILE_GROUP";
+
+    /*----------------------------------------*
      * Memory Real Usage
      *----------------------------------------*/
 
@@ -282,6 +343,9 @@ class EnvLoader extends BaseEnvLoader
         $this->baseDirectory     = $this->getEnvString(self::BASE_DIRECTORY_KEY, self::BASE_DIRECTORY);
         $this->fileNameFormat    = $this->getEnvString(self::FILE_NAME_FORMAT_KEY, self::FILE_NAME_FORMAT);
         $this->fileExtension     = $this->getEnvString(self::FILE_EXTENSION_KEY, self::FILE_EXTENSION);
+        $this->fileMode          = $this->getEnvInt(self::FILE_MODE_KEY, self::FILE_MODE);
+        $this->fileOwner         = $this->getEnvStringNullable(self::FILE_OWNER_KEY);
+        $this->fileGroup         = $this->getEnvStringNullable(self::FILE_GROUP_KEY);
         $this->isMemoryRealUsage = $this->getEnvBool(self::IS_MEMORY_REAL_USAGE_KEY, self::IS_MEMORY_REAL_USAGE);
         $this->isMemoryFormat    = $this->getEnvBool(self::IS_MEMORY_FORMAT_KEY, self::IS_MEMORY_FORMAT);
         $this->memoryPrecision   = $this->getEnvInt(self::MEMORY_PRECISION_KEY, self::MEMORY_PRECISION);
