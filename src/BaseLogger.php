@@ -8,7 +8,6 @@ use YukataRm\Logger\EnvLoader;
 use YukataRm\Logger\Enum\LogLevelEnum;
 use YukataRm\Logger\Enum\LogFormatEnum;
 
-use YukataRm\File\Base\Interface\WriterInterface;
 use YukataRm\File\Proxy\Writer;
 
 /**
@@ -105,7 +104,109 @@ abstract class BaseLogger implements BaseLoggerInterface
      */
     protected function loggingByWriter(): void
     {
-        Writer::write($this->filePath(), $this->contents, true, true);
+        Writer::write(
+            $this->filePath(),
+            $this->contents,
+            true,
+            true,
+            $this->fileMode(),
+            $this->fileOwner(),
+            $this->fileGroup()
+        );
+    }
+
+    /*----------------------------------------*
+     * Permission
+     *----------------------------------------*/
+
+    /**
+     * file mode
+     * 
+     * @var int
+     */
+    protected int $fileMode;
+
+    /**
+     * file owner
+     * 
+     * @var string
+     */
+    protected string $fileOwner;
+
+    /**
+     * file group
+     * 
+     * @var string
+     */
+    protected string $fileGroup;
+
+    /**
+     * get file mode
+     * 
+     * @return int
+     */
+    public function fileMode(): int
+    {
+        return isset($this->fileMode) ? $this->fileMode : 0666;
+    }
+
+    /**
+     * set file mode
+     * 
+     * @param int $fileMode
+     * @return static
+     */
+    public function setFileMode(int $fileMode): static
+    {
+        $this->fileMode = $fileMode;
+
+        return $this;
+    }
+
+    /**
+     * get file owner
+     * 
+     * @return string|null
+     */
+    public function fileOwner(): string|null
+    {
+        return isset($this->fileOwner) ? $this->fileOwner : null;
+    }
+
+    /**
+     * set file owner
+     * 
+     * @param string $fileOwner
+     * @return static
+     */
+    public function setFileOwner(string $fileOwner): static
+    {
+        $this->fileOwner = $fileOwner;
+
+        return $this;
+    }
+
+    /**
+     * get file group
+     * 
+     * @return string|null
+     */
+    public function fileGroup(): string|null
+    {
+        return isset($this->fileGroup) ? $this->fileGroup : null;
+    }
+
+    /**
+     * set file group
+     * 
+     * @param string $fileGroup
+     * @return static
+     */
+    public function setFileGroup(string $fileGroup): static
+    {
+        $this->fileGroup = $fileGroup;
+
+        return $this;
     }
 
     /*----------------------------------------*

@@ -42,6 +42,55 @@ interface BaseLoggerInterface
     public function filePath(): string;
 
     /*----------------------------------------*
+     * Permission
+     *----------------------------------------*/
+
+    /**
+     * get file mode
+     * 
+     * @return int
+     */
+    public function fileMode(): int;
+
+    /**
+     * set file mode
+     * 
+     * @param int $fileMode
+     * @return static
+     */
+    public function setFileMode(int $fileMode): static;
+
+    /**
+     * get file owner
+     * 
+     * @return string|null
+     */
+    public function fileOwner(): string|null;
+
+    /**
+     * set file owner
+     * 
+     * @param string $fileOwner
+     * @return static
+     */
+    public function setFileOwner(string $fileOwner): static;
+
+    /**
+     * get file group
+     * 
+     * @return string|null
+     */
+    public function fileGroup(): string|null;
+
+    /**
+     * set file group
+     * 
+     * @param string $fileGroup
+     * @return static
+     */
+    public function setFileGroup(string $fileGroup): static;
+
+    /*----------------------------------------*
      * Log Rotation
      *----------------------------------------*/
 
