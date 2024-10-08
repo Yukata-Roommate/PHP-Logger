@@ -311,21 +311,21 @@ class EnvLoader extends BaseEnvLoader
     /**
      * memory usage precision
      *
-     * @return int
+     * @var int
      */
     public int $memoryPrecision;
 
     /**
      * memory usage precision default value
      *
-     * @return int
+     * @var int
      */
     const MEMORY_PRECISION = 2;
 
     /**
      * memory usage precision key name
      *
-     * @return string
+     * @var string
      */
     const MEMORY_PRECISION_KEY = self::KEY_PREFIX . "MEMORY_PRECISION";
 
