@@ -8,6 +8,20 @@ use YukataRm\EnvLoader\BaseEnvLoader;
  * EnvLoader
  * 
  * @package YukataRm\Logger
+ * 
+ * @property-read bool $isRotateLog
+ * @property-read int $retentionDays
+ * @property-read string $logFormat
+ * @property-read string $logFormatJson
+ * @property-read string $baseDirectory
+ * @property-read string $fileNameFormat
+ * @property-read string $fileExtension
+ * @property-read int $fileMode
+ * @property-read string|null $fileOwner
+ * @property-read string|null $fileGroup
+ * @property-read bool $isMemoryRealUsage
+ * @property-read bool $isMemoryFormat
+ * @property-read int $memoryPrecision
  */
 class EnvLoader extends BaseEnvLoader
 {
@@ -25,16 +39,9 @@ class EnvLoader extends BaseEnvLoader
     /**
      * whether rotate log
      * 
-     * @var bool
+     * @var bool|null
      */
-    public bool $isRotateLog;
-
-    /**
-     * whether rotate log default value
-     * 
-     * @var bool
-     */
-    const IS_ROTATE_LOG = true;
+    protected bool|null $_isRotateLog;
 
     /**
      * whether rotate log key name
@@ -43,6 +50,16 @@ class EnvLoader extends BaseEnvLoader
      */
     const IS_ROTATE_LOG_KEY = self::KEY_PREFIX . "IS_ROTATE_LOG";
 
+    /**
+     * get whether rotate log
+     * 
+     * @return bool
+     */
+    public function isRotateLog(): bool
+    {
+        return isset($this->_isRotateLog) ? $this->_isRotateLog : true;
+    }
+
     /*----------------------------------------*
      * Retention Days
      *----------------------------------------*/
@@ -50,16 +67,9 @@ class EnvLoader extends BaseEnvLoader
     /**
      * retention days
      * 
-     * @var int
+     * @var int|null
      */
-    public int $retentionDays;
-
-    /**
-     * retention days default value
-     * 
-     * @var int
-     */
-    const RETENTION_DAYS = 7;
+    protected int|null $_retentionDays;
 
     /**
      * retention days key name
@@ -68,6 +78,16 @@ class EnvLoader extends BaseEnvLoader
      */
     const RETENTION_DAYS_KEY = self::KEY_PREFIX . "RETENTION_DAYS";
 
+    /**
+     * get retention days
+     * 
+     * @return int
+     */
+    public function retentionDays(): int
+    {
+        return isset($this->_retentionDays) ? $this->_retentionDays : 7;
+    }
+
     /*----------------------------------------*
      * Log Format
      *----------------------------------------*/
@@ -75,16 +95,9 @@ class EnvLoader extends BaseEnvLoader
     /**
      * log format
      * 
-     * @var string
+     * @var string|null
      */
-    public string $logFormat;
-
-    /**
-     * log format default value
-     * 
-     * @var string
-     */
-    const LOG_FORMAT = "[%datetime%] %level%: %message%";
+    protected string|null $_logFormat;
 
     /**
      * log format key name
@@ -93,6 +106,16 @@ class EnvLoader extends BaseEnvLoader
      */
     const LOG_FORMAT_KEY = self::KEY_PREFIX . "LOG_FORMAT";
 
+    /**
+     * get log format
+     * 
+     * @return string
+     */
+    public function logFormat(): string
+    {
+        return isset($this->_logFormat) ? $this->_logFormat : "[%datetime%] %level%: %message%";
+    }
+
     /*----------------------------------------*
      * Format JSON
      *---------------------------------------*/
@@ -100,16 +123,9 @@ class EnvLoader extends BaseEnvLoader
     /**
      * log json format
      * 
-     * @var string
+     * @var string|null
      */
-    public string $logFormatJson;
-
-    /**
-     * log json format default value
-     * 
-     * @var string
-     */
-    const LOG_FORMAT_JSON = "datetime, level, message";
+    protected string|null $_logFormatJson;
 
     /**
      * log json format key name
@@ -118,6 +134,16 @@ class EnvLoader extends BaseEnvLoader
      */
     const LOG_FORMAT_JSON_KEY = self::KEY_PREFIX . "LOG_FORMAT_JSON";
 
+    /**
+     * get log json format
+     * 
+     * @return string
+     */
+    public function logFormatJson(): string
+    {
+        return isset($this->_logFormatJson) ? $this->_logFormatJson : "datetime, level, message";
+    }
+
     /*----------------------------------------*
      * Base Directory
      *----------------------------------------*/
@@ -125,16 +151,9 @@ class EnvLoader extends BaseEnvLoader
     /**
      * base directory
      * 
-     * @var string
+     * @var string|null
      */
-    public string $baseDirectory;
-
-    /**
-     * base directory default value
-     * 
-     * @var string
-     */
-    const BASE_DIRECTORY = "logs";
+    protected string|null $_baseDirectory;
 
     /**
      * base directory key name
@@ -143,6 +162,16 @@ class EnvLoader extends BaseEnvLoader
      */
     const BASE_DIRECTORY_KEY = self::KEY_PREFIX . "BASE_DIRECTORY";
 
+    /**
+     * get base directory
+     * 
+     * @return string
+     */
+    public function baseDirectory(): string
+    {
+        return isset($this->_baseDirectory) ? $this->_baseDirectory : "logs";
+    }
+
     /*----------------------------------------*
      * File Name Format
      *----------------------------------------*/
@@ -150,16 +179,9 @@ class EnvLoader extends BaseEnvLoader
     /**
      * file name format
      * 
-     * @var string
+     * @var string|null
      */
-    public string $fileNameFormat;
-
-    /**
-     * file name format default value
-     * 
-     * @var string
-     */
-    const FILE_NAME_FORMAT = "Y-m-d";
+    protected string|null $_fileNameFormat;
 
     /**
      * file name format key name
@@ -168,6 +190,16 @@ class EnvLoader extends BaseEnvLoader
      */
     const FILE_NAME_FORMAT_KEY = self::KEY_PREFIX . "FILE_NAME_FORMAT";
 
+    /**
+     * get file name format
+     * 
+     * @return string
+     */
+    public function fileNameFormat(): string
+    {
+        return isset($this->_fileNameFormat) ? $this->_fileNameFormat : "Y-m-d";
+    }
+
     /*----------------------------------------*
      * File Extension
      *----------------------------------------*/
@@ -175,16 +207,9 @@ class EnvLoader extends BaseEnvLoader
     /**
      * file extension
      * 
-     * @var string
+     * @var string|null
      */
-    public string $fileExtension;
-
-    /**
-     * file extension default value
-     * 
-     * @var string
-     */
-    const FILE_EXTENSION = "log";
+    protected string|null $_fileExtension;
 
     /**
      * file extension key name
@@ -193,6 +218,16 @@ class EnvLoader extends BaseEnvLoader
      */
     const FILE_EXTENSION_KEY = self::KEY_PREFIX . "FILE_EXTENSION";
 
+    /**
+     * get file extension
+     * 
+     * @return string
+     */
+    public function fileExtension(): string
+    {
+        return isset($this->_fileExtension) ? $this->_fileExtension : "log";
+    }
+
     /*----------------------------------------*
      * File Mode
      *----------------------------------------*/
@@ -200,16 +235,9 @@ class EnvLoader extends BaseEnvLoader
     /**
      * file mode
      * 
-     * @var int
+     * @var int|null
      */
-    public int $fileMode;
-
-    /**
-     * file mode default value
-     * 
-     * @var int
-     */
-    const FILE_MODE = 0666;
+    protected int|null $_fileMode;
 
     /**
      * file mode key name
@@ -217,6 +245,16 @@ class EnvLoader extends BaseEnvLoader
      * @var string
      */
     const FILE_MODE_KEY = self::KEY_PREFIX . "FILE_MODE";
+
+    /**
+     * get file mode
+     * 
+     * @return int
+     */
+    public function fileMode(): int
+    {
+        return isset($this->_fileMode) ? $this->_fileMode : 0666;
+    }
 
     /*----------------------------------------*
      * File Owner
@@ -227,7 +265,7 @@ class EnvLoader extends BaseEnvLoader
      * 
      * @var string|null
      */
-    public string|null $fileOwner;
+    protected string|null $_fileOwner;
 
     /**
      * file mode key name
@@ -235,6 +273,16 @@ class EnvLoader extends BaseEnvLoader
      * @var string
      */
     const FILE_OWNER_KEY = self::KEY_PREFIX . "FILE_OWNER";
+
+    /**
+     * get file owner
+     * 
+     * @return string|null
+     */
+    public function fileOwner(): string|null
+    {
+        return isset($this->_fileOwner) ? $this->_fileOwner : null;
+    }
 
     /*----------------------------------------*
      * File Group
@@ -245,7 +293,7 @@ class EnvLoader extends BaseEnvLoader
      * 
      * @var string|null
      */
-    public string|null $fileGroup;
+    protected string|null $_fileGroup;
 
     /**
      * file group key name
@@ -254,6 +302,16 @@ class EnvLoader extends BaseEnvLoader
      */
     const FILE_GROUP_KEY = self::KEY_PREFIX . "FILE_GROUP";
 
+    /**
+     * get file group
+     * 
+     * @return string|null
+     */
+    public function fileGroup(): string|null
+    {
+        return isset($this->_fileGroup) ? $this->_fileGroup : null;
+    }
+
     /*----------------------------------------*
      * Memory Real Usage
      *----------------------------------------*/
@@ -261,16 +319,9 @@ class EnvLoader extends BaseEnvLoader
     /**
      * whether real memory usage
      *
-     * @var bool
+     * @var bool|null
      */
-    public bool $isMemoryRealUsage;
-
-    /**
-     * whether real memory usage default value
-     *
-     * @var bool
-     */
-    const IS_MEMORY_REAL_USAGE = true;
+    protected bool|null $_isMemoryRealUsage;
 
     /**
      * whether real memory usage key name
@@ -279,6 +330,16 @@ class EnvLoader extends BaseEnvLoader
      */
     const IS_MEMORY_REAL_USAGE_KEY = self::KEY_PREFIX . "IS_MEMORY_REAL_USAGE";
 
+    /**
+     * get whether real memory usage
+     * 
+     * @return bool
+     */
+    public function isMemoryRealUsage(): bool
+    {
+        return isset($this->_isMemoryRealUsage) ? $this->_isMemoryRealUsage : true;
+    }
+
     /*----------------------------------------*
      * Memory Format
      *----------------------------------------*/
@@ -286,16 +347,9 @@ class EnvLoader extends BaseEnvLoader
     /**
      * whether memory format
      *
-     * @var bool
+     * @var bool|null
      */
-    public bool $isMemoryFormat;
-
-    /**
-     * whether memory format default value
-     *
-     * @var bool
-     */
-    const IS_MEMORY_FORMAT = true;
+    protected bool|null $_isMemoryFormat;
 
     /**
      * whether memory format key name
@@ -304,6 +358,16 @@ class EnvLoader extends BaseEnvLoader
      */
     const IS_MEMORY_FORMAT_KEY = self::KEY_PREFIX . "IS_MEMORY_FORMAT";
 
+    /**
+     * get whether memory format
+     * 
+     * @return bool
+     */
+    public function isMemoryFormat(): bool
+    {
+        return isset($this->_isMemoryFormat) ? $this->_isMemoryFormat : true;
+    }
+
     /*----------------------------------------*
      * Memory Precision
      *----------------------------------------*/
@@ -311,16 +375,9 @@ class EnvLoader extends BaseEnvLoader
     /**
      * memory usage precision
      *
-     * @var int
+     * @var int|null
      */
-    public int $memoryPrecision;
-
-    /**
-     * memory usage precision default value
-     *
-     * @var int
-     */
-    const MEMORY_PRECISION = 2;
+    protected int|null $_memoryPrecision;
 
     /**
      * memory usage precision key name
@@ -330,24 +387,34 @@ class EnvLoader extends BaseEnvLoader
     const MEMORY_PRECISION_KEY = self::KEY_PREFIX . "MEMORY_PRECISION";
 
     /**
-     * set .env parameters
+     * get memory usage precision
+     * 
+     * @return int
+     */
+    public function memoryPrecision(): int
+    {
+        return isset($this->_memoryPrecision) ? $this->_memoryPrecision : 2;
+    }
+
+    /**
+     * bind .env parameters
      * 
      * @return void
      */
-    protected function setEnv(): void
+    protected function bind(): void
     {
-        $this->isRotateLog       = $this->getEnvBool(self::IS_ROTATE_LOG_KEY, self::IS_ROTATE_LOG);
-        $this->retentionDays     = $this->getEnvInt(self::RETENTION_DAYS_KEY, self::RETENTION_DAYS);
-        $this->logFormat         = $this->getEnvString(self::LOG_FORMAT_KEY, self::LOG_FORMAT);
-        $this->logFormatJson     = $this->getEnvString(self::LOG_FORMAT_JSON_KEY, self::LOG_FORMAT_JSON);
-        $this->baseDirectory     = $this->getEnvString(self::BASE_DIRECTORY_KEY, self::BASE_DIRECTORY);
-        $this->fileNameFormat    = $this->getEnvString(self::FILE_NAME_FORMAT_KEY, self::FILE_NAME_FORMAT);
-        $this->fileExtension     = $this->getEnvString(self::FILE_EXTENSION_KEY, self::FILE_EXTENSION);
-        $this->fileMode          = $this->getEnvInt(self::FILE_MODE_KEY, self::FILE_MODE);
-        $this->fileOwner         = $this->getEnvStringNullable(self::FILE_OWNER_KEY);
-        $this->fileGroup         = $this->getEnvStringNullable(self::FILE_GROUP_KEY);
-        $this->isMemoryRealUsage = $this->getEnvBool(self::IS_MEMORY_REAL_USAGE_KEY, self::IS_MEMORY_REAL_USAGE);
-        $this->isMemoryFormat    = $this->getEnvBool(self::IS_MEMORY_FORMAT_KEY, self::IS_MEMORY_FORMAT);
-        $this->memoryPrecision   = $this->getEnvInt(self::MEMORY_PRECISION_KEY, self::MEMORY_PRECISION);
+        $this->isRotateLog       = $this->nullableBool(self::IS_ROTATE_LOG_KEY);
+        $this->retentionDays     = $this->nullableInt(self::RETENTION_DAYS_KEY);
+        $this->logFormat         = $this->nullableString(self::LOG_FORMAT_KEY);
+        $this->logFormatJson     = $this->nullableString(self::LOG_FORMAT_JSON_KEY);
+        $this->baseDirectory     = $this->nullableString(self::BASE_DIRECTORY_KEY);
+        $this->fileNameFormat    = $this->nullableString(self::FILE_NAME_FORMAT_KEY);
+        $this->fileExtension     = $this->nullableString(self::FILE_EXTENSION_KEY);
+        $this->fileMode          = $this->nullableInt(self::FILE_MODE_KEY);
+        $this->fileOwner         = $this->nullableString(self::FILE_OWNER_KEY);
+        $this->fileGroup         = $this->nullableString(self::FILE_GROUP_KEY);
+        $this->isMemoryRealUsage = $this->nullableBool(self::IS_MEMORY_REAL_USAGE_KEY);
+        $this->isMemoryFormat    = $this->nullableBool(self::IS_MEMORY_FORMAT_KEY);
+        $this->memoryPrecision   = $this->nullableInt(self::MEMORY_PRECISION_KEY);
     }
 }
