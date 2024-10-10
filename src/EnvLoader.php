@@ -403,18 +403,18 @@ class EnvLoader extends BaseEnvLoader
      */
     protected function bind(): void
     {
-        $this->isRotateLog       = $this->nullableBool(self::IS_ROTATE_LOG_KEY);
-        $this->retentionDays     = $this->nullableInt(self::RETENTION_DAYS_KEY);
-        $this->logFormat         = $this->nullableString(self::LOG_FORMAT_KEY);
-        $this->logFormatJson     = $this->nullableString(self::LOG_FORMAT_JSON_KEY);
-        $this->baseDirectory     = $this->nullableString(self::BASE_DIRECTORY_KEY);
-        $this->fileNameFormat    = $this->nullableString(self::FILE_NAME_FORMAT_KEY);
-        $this->fileExtension     = $this->nullableString(self::FILE_EXTENSION_KEY);
-        $this->fileMode          = $this->nullableInt(self::FILE_MODE_KEY);
-        $this->fileOwner         = $this->nullableString(self::FILE_OWNER_KEY);
-        $this->fileGroup         = $this->nullableString(self::FILE_GROUP_KEY);
-        $this->isMemoryRealUsage = $this->nullableBool(self::IS_MEMORY_REAL_USAGE_KEY);
-        $this->isMemoryFormat    = $this->nullableBool(self::IS_MEMORY_FORMAT_KEY);
-        $this->memoryPrecision   = $this->nullableInt(self::MEMORY_PRECISION_KEY);
+        $this->_isRotateLog       = $this->nullableBool(self::IS_ROTATE_LOG_KEY);
+        $this->_retentionDays     = $this->nullableInt(self::RETENTION_DAYS_KEY);
+        $this->_logFormat         = $this->nullableString(self::LOG_FORMAT_KEY);
+        $this->_logFormatJson     = $this->nullableString(self::LOG_FORMAT_JSON_KEY);
+        $this->_baseDirectory     = $this->nullableString(self::BASE_DIRECTORY_KEY);
+        $this->_fileNameFormat    = $this->nullableString(self::FILE_NAME_FORMAT_KEY);
+        $this->_fileExtension     = $this->nullableString(self::FILE_EXTENSION_KEY);
+        $this->_fileMode          = $this->nullableInt(self::FILE_MODE_KEY);
+        $this->_fileOwner         = $this->nullableString(self::FILE_OWNER_KEY);
+        $this->_fileGroup         = $this->nullableString(self::FILE_GROUP_KEY);
+        $this->_isMemoryRealUsage = $this->nullableBool(self::IS_MEMORY_REAL_USAGE_KEY);
+        $this->_isMemoryFormat    = $this->nullableBool(self::IS_MEMORY_FORMAT_KEY);
+        $this->_memoryPrecision   = $this->nullableInt(self::MEMORY_PRECISION_KEY);
     }
 }
